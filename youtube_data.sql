@@ -37,7 +37,7 @@ Select youtuber, subscribers, ROW_Number() OVER() AS rowss  FROM youtube_data)
 Select * from row_data
 where mod(rowss,2)=0
 
--- country wise top channel
+-- country wise top channel using Partition
 WITH datas as(
 Select country,category, youtuber, subscribers, ROW_Number()
 OVER(Partition by country order by subscribers Desc) AS rown FROM youtube_data)
