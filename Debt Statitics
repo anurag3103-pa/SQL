@@ -1,0 +1,28 @@
+-- Number of Distinct Countries
+SELECT COUNT(DISTINCT(country_code)) AS total_distinct_countries from international_debt
+
+-- Distinct Debt Indicators
+SELECT DISTINCT(indicator_code) AS distinct_debt_indicators from international_debt
+
+-- Total Debt in Millions
+SELECT ROUND(SUM(international_debt.debt)/1000000, 2) AS total_debt
+FROM international_debt
+
+-- Highest Debt Country
+SELECT international_debt.country_name, SUM(international_debt.debt) AS total_debt
+FROM international_debt
+GROUP BY country_name
+ORDER BY total_debt DESC
+LIMIT 1;
+
+-- Average Debt per Indicator
+SELECT international_debt.indicator_code AS debt_indicator, international_debt.indicator_name,
+ AVG(international_debt.debt) AS average_debt FROM international_debt
+GROUP BY debt_indicator, indicator_name
+ORDER BY average_debt DESC
+LIMIT 10;
+
+-- Highest Principal Repayment
+SELECT international_debt.country_name, international_debt.indicator_name
+FROM international_debt
+WHERE debt = (SELECT MAX(debt) FROM international_debt
