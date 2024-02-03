@@ -19,6 +19,7 @@ ORDER BY Total_subscribers DESC
 SELECT country, youtuber FROM youtube_data
 WHERE country_rank = 1
 
+-- Practice new things	
 -- USE of OLAP for better overview
 
 SELECT country, category, COUNT(*) As Category FROM youtube_data
